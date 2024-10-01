@@ -12,10 +12,13 @@ table {
     background-color: white;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
+    overflow-x: auto;
 }
-thead th {
-    position: sticky;
+.table {
+    margin-bottom: 1px !important;
+}
+thead td {
+    font-weight: bold;
     top: 0;
     background-color: #e6e6e6;
     text-align: center;
@@ -30,15 +33,16 @@ tbody td {
     font-size: 18px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    font-weight: 400 !important;
 }
 .question-cell {
     text-align: left;
     padding: 10px;
-    font-weight: bold;
+    font-weight: 400;
     background-color: #eef2f7;
     font-size: 16px;
+    min-width: 300px;
 }
+
 .plus {
     color: green;
     background-color: #ccffcc !important;
@@ -61,10 +65,19 @@ tbody td {
 .cell {
     vertical-align: middle;
     font-size: 20px;
+    min-width: 100px;
+    height: 60px;
 }
 
 tr {
     height: 50px;
     border: 2px solid #dee2e6;
     margin: 2px;
+}
+
+th {
+    position: sticky;
+    left: 0;
+    z-index: 1;
+    background-color: white !important;
 }

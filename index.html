@@ -21,71 +21,71 @@
                 <thead>
                     <tr>
                         <th></th>
-                        <th>
+                        <td>
                             023-21341
                             <span class="remove-btn" data-column="1">&times;</span>
-                        </th>
-                        <th>
+                        </td>
+                        <td>
                             023-13213
                             <span class="remove-btn" data-column="2">&times;</span>
-                        </th>
-                        <th>
+                        </td>
+                        <td>
                             023-32412
                             <span class="remove-btn" data-column="3">&times;</span>
-                        </th>
+                        </td>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td class="question-cell">Прием вагонов на межрейсовое содержание произведен вовремя</td>
+                        <th class="question-cell">Прием вагонов на межрейсовое содержание произведен вовремя</th>
                         <td class="cell neutral" data-status="neutral">x</td>
                         <td class="cell neutral" data-status="neutral">x</td>
                         <td class="cell neutral" data-status="neutral">x</td>
                     </tr>
                     <tr>
-                        <td class="question-cell">Лист заявочного ремонта направлен причастным</td>
+                        <th class="question-cell">Лист заявочного ремонта направлен причастным</th>
                         <td class="cell neutral" data-status="neutral">x</td>
                         <td class="cell neutral" data-status="neutral">x</td>
                         <td class="cell neutral" data-status="neutral">x</td>
                     </tr>
                     <tr>
-                        <td class="question-cell">Внутренняя уборка в вагоне надлежащего качества</td>
+                        <th class="question-cell">Внутренняя уборка в вагоне надлежащего качества</th>
                         <td class="cell neutral" data-status="neutral">x</td>
                         <td class="cell neutral" data-status="neutral">x</td>
                         <td class="cell neutral" data-status="neutral">x</td>
                     </tr>
                     <tr>
-                        <td class="question-cell">Весь заявочный ремонт по вагону внесен в лист</td>
+                        <th class="question-cell">Весь заявочный ремонт по вагону внесен в лист</th>
                         <td class="cell neutral" data-status="neutral">x</td>
                         <td class="cell neutral" data-status="neutral">x</td>
                         <td class="cell neutral" data-status="neutral">x</td>
                     </tr>
                     <tr>
-                        <td class="question-cell">Весь заявочный ремонт выполнен</td>
+                        <th class="question-cell">Весь заявочный ремонт выполнен</th>
                         <td class="cell neutral" data-status="neutral">x</td>
                         <td class="cell neutral" data-status="neutral">x</td>
                         <td class="cell neutral" data-status="neutral">x</td>
                     </tr>
                     <tr>
-                        <td class="question-cell">Оборудование для радиотрансляции исправно</td>
+                        <th class="question-cell">Оборудование для радиотрансляции исправно</th>
                         <td class="cell neutral" data-status="neutral">x</td>
                         <td class="cell neutral" data-status="neutral">x</td>
                         <td class="cell neutral" data-status="neutral">x</td>
                     </tr>
                     <tr>
-                        <td class="question-cell">Температура в салоне при ПДК</td>
+                        <th class="question-cell">Температура в салоне при ПДК</th>
                         <td class="cell neutral" data-status="neutral">x</td>
                         <td class="cell neutral" data-status="neutral">x</td>
                         <td class="cell neutral" data-status="neutral">x</td>
                     </tr>
                     <tr>
-                        <td class="question-cell">Холодильник исправен</td>
+                        <th class="question-cell">Холодильник исправен</th>
                         <td class="cell neutral" data-status="neutral">x</td>
                         <td class="cell neutral" data-status="neutral">x</td>
                         <td class="cell neutral" data-status="neutral">x</td>
                     </tr>
                     <tr>
-                        <td class="question-cell">СВЧ-печь исправна</td>
+                        <th class="question-cell">СВЧ-печь исправна</th>
                         <td class="cell neutral" data-status="neutral">x</td>
                         <td class="cell neutral" data-status="neutral">x</td>
                         <td class="cell neutral" data-status="neutral">x</td>
@@ -145,16 +145,16 @@
         });
 
         function addWagonColumn(wagonNumber) {
-            let columnCount = $('th').length;
+            let columnCount = $('td').length;
             $('thead tr').append(`
-                <th>
+                <td>
                     ${wagonNumber}
                     <span class="remove-btn" data-column="${columnCount}">&times;</span>
-                </th>
+                </td>
             `);
             $('tbody tr').each(function() {
                 $(this).append(`
-                    <td class="cell neutral" data-status="neutral">X</td>
+                    <td class="cell neutral" data-status="neutral">x</td>
                 `);
             });
 
