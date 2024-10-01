@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Чек-лист Вагонов</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+    <h2 class="text-center mb-4">Чек-лист Вагонов</h2>
+
+    <div class="table-wrapper">
+        <button id="add-wagon-btn" class="btn btn-primary mb-3">Добавить Вагон</button>
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>
+                            023-21341
+                            <span class="remove-btn" data-column="1">&times;</span>
+                        </th>
+                        <th>
+                            023-13213
+                            <span class="remove-btn" data-column="2">&times;</span>
+                        </th>
+                        <th>
+                            023-32412
+                            <span class="remove-btn" data-column="3">&times;</span>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="question-cell">Прием вагонов на межрейсовое содержание произведен вовремя</td>
+                        <td class="cell neutral" data-status="neutral">x</td>
+                        <td class="cell neutral" data-status="neutral">x</td>
+                        <td class="cell neutral" data-status="neutral">x</td>
+                    </tr>
+                    <tr>
+                        <td class="question-cell">Лист заявочного ремонта направлен причастным</td>
+                        <td class="cell neutral" data-status="neutral">x</td>
+                        <td class="cell neutral" data-status="neutral">x</td>
+                        <td class="cell neutral" data-status="neutral">x</td>
+                    </tr>
+                    <tr>
+                        <td class="question-cell">Внутренняя уборка в вагоне надлежащего качества</td>
+                        <td class="cell neutral" data-status="neutral">x</td>
+                        <td class="cell neutral" data-status="neutral">x</td>
+                        <td class="cell neutral" data-status="neutral">x</td>
+                    </tr>
+                    <tr>
+                        <td class="question-cell">Весь заявочный ремонт по вагону внесен в лист</td>
+                        <td class="cell neutral" data-status="neutral">x</td>
+                        <td class="cell neutral" data-status="neutral">x</td>
+                        <td class="cell neutral" data-status="neutral">x</td>
+                    </tr>
+                    <tr>
+                        <td class="question-cell">Весь заявочный ремонт выполнен</td>
+                        <td class="cell neutral" data-status="neutral">x</td>
+                        <td class="cell neutral" data-status="neutral">x</td>
+                        <td class="cell neutral" data-status="neutral">x</td>
+                    </tr>
+                    <tr>
+                        <td class="question-cell">Оборудование для радиотрансляции исправно</td>
+                        <td class="cell neutral" data-status="neutral">x</td>
+                        <td class="cell neutral" data-status="neutral">x</td>
+                        <td class="cell neutral" data-status="neutral">x</td>
+                    </tr>
+                    <tr>
+                        <td class="question-cell">Температура в салоне при ПДК</td>
+                        <td class="cell neutral" data-status="neutral">x</td>
+                        <td class="cell neutral" data-status="neutral">x</td>
+                        <td class="cell neutral" data-status="neutral">x</td>
+                    </tr>
+                    <tr>
+                        <td class="question-cell">Холодильник исправен</td>
+                        <td class="cell neutral" data-status="neutral">x</td>
+                        <td class="cell neutral" data-status="neutral">x</td>
+                        <td class="cell neutral" data-status="neutral">x</td>
+                    </tr>
+                    <tr>
+                        <td class="question-cell">СВЧ-печь исправна</td>
+                        <td class="cell neutral" data-status="neutral">x</td>
+                        <td class="cell neutral" data-status="neutral">x</td>
+                        <td class="cell neutral" data-status="neutral">x</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+        // Логика смены статусов ячеек
+        $('.cell').click(function() {
+            let currentStatus = $(this).attr('data-status');
+            
+            if (currentStatus === 'neutral') {
+                $(this).attr('data-status', 'plus');
+                $(this).removeClass('neutral minus').addClass('plus').text('+');
+            } else if (currentStatus === 'plus') {
+                $(this).attr('data-status', 'minus');
+                $(this).removeClass('plus neutral').addClass('minus').text('-');
+            } else {
+                $(this).attr('data-status', 'neutral');
+                $(this).removeClass('minus plus').addClass('neutral').text('x');
+            }
+        });
+
+        // Логика удаления столбца
+        $('.remove-btn').click(function() {
+            let column = $(this).data('column');
+            $('th:nth-child(' + (column + 1) + ')').remove();
+            $('td:nth-child(' + (column + 1) + ')').remove();
+        });
+
+        // Логика добавления нового вагона
+        $('#add-wagon-btn').click(function() {
+            Swal.fire({
+                title: 'Введите номер вагона',
+                input: 'text',
+                inputLabel: 'Номер вагона',
+                inputPlaceholder: 'Например, 023-99999',
+                showCancelButton: true,
+                confirmButtonText: 'Добавить',
+                cancelButtonText: 'Отмена',
+                inputValidator: (value) => {
+                    if (!value) {
+                        return 'Введите номер вагона!';
+                    }
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    let wagonNumber = result.value;
+                    addWagonColumn(wagonNumber);
+                }
+            });
+        });
+
+        function addWagonColumn(wagonNumber) {
+            let columnCount = $('th').length;
+            $('thead tr').append(`
+                <th>
+                    ${wagonNumber}
+                    <span class="remove-btn" data-column="${columnCount}">&times;</span>
+                </th>
+            `);
+            $('tbody tr').each(function() {
+                $(this).append(`
+                    <td class="cell neutral" data-status="neutral">X</td>
+                `);
+            });
+
+            // Обновляем события на кнопках
+            $('.remove-btn').off('click').click(function() {
+                let column = $(this).data('column');
+                $('th:nth-child(' + (column + 1) + ')').remove();
+                $('td:nth-child(' + (column + 1) + ')').remove();
+            });
+        }
+    });
+</script>
+
+</body>
+</html>
